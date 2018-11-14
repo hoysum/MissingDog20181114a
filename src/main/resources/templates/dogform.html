@@ -12,37 +12,27 @@
     </th:block>
 </head>
 <body>
+<div th:replace="base:: nav"></div>
 
-<div th:fragment="container"></div>
+<form method="POST" action="/process" th:object="${dog}"
+      enctype="multipart/form-data">
 
-<form action="#"
-      th:action="@{/process}"
-      th:object="${dog}"
-      method="post">
-    <input type="hidden" th:field="*{id}" />
-    Name :<input type="text" th:field="*{name}" />
-    <span th:if="${#fields.hasErrors('name')}"
-          th:errors="*{name}"></span><br />
-    Date :<input type="date" th:field="*{date}" />
-    <span th:if="${#fields.hasErrors('date')}"
-          th:errors="*{date}"></span><br />
-    Description :<textarea rows="3" th:field="*{description}" />
-    <span th:if="${#fields.hasErrors('description')}"
-          th:errors="*{description}"></span><br />
 
+    Name :<input type="text" th:field="*{name}" /><br>
+    Date :<input type="date" th:field="*{date}" /><br>
+    Description :<textarea rows="3" th:field="*{description}" /><br>
+    <!--Status:<input type="text" th:field="*{status}"/><br>-->
     <select id="status" th:field="*{status}">
-    <option class="dropdown-item" value="lost">Lost</option>
+        <option class="dropdown-item" value="lost">Lost</option>
         <option class="dropdown-item" value="found">Found</option>
     </select>
-
-    <span th:if="${#fields.hasErrors('status')}"
-          th:errors="*{status}"></span><br />
-
-    File :<input type="file" th:field="*{file}" />
-    <span th:if="${#fields.hasErrors('file')}"
-          th:errors="*{file}"></span><br />
-    <br />
+    File :<input type="file" name="file"  /></br><br>
     <input type="submit" value="Submit" />
+    <br />
+
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

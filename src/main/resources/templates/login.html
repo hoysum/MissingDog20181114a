@@ -12,9 +12,28 @@
     </th:block>
 </head>
 <body>
-<h1>Login page</h1>
+<body>
+<span sec:authorize="isAuthenticated()">
+       <a href="#">Welcome <span th:text="${#authentication.name}"></span></a>
+    <a href="/all">All Pets</a>
+      <a href="/lost">Lost Pets</a>
+    <a href="/found">Found Pets</a>
+  <a href="/add">Add Message</a>
+  <a href="/logout">Logout</a>
 
-<div th:fragment="container"></div>
+</span>
+
+<span sec:authorize="!isAuthenticated()">
+        <a href="/all">All Pets</a>
+      <a href="/lost">Lost Pets</a>
+    <a href="/found">Found Pets</a>
+  <a href="/login">Login</a>
+      <a href="/register">Register</a>
+
+</span>
+
+
+<h1>Login page</h1>
 
 
 </span>

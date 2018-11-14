@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,12 +7,36 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+<body>
+<span sec:authorize="isAuthenticated()">
+       <a href="#">Welcome <span th:text="${#authentication.name}"></span></a>
+    <a href="/all">All Pets</a>
+      <a href="/lost">Lost Pets</a>
+    <a href="/found">Found Pets</a>
+  <a href="/add">Add Message</a>
+  <a href="/logout">Logout</a>
+
+</span>
+
+<span sec:authorize="!isAuthenticated()">
+        <a href="/all">All Pets</a>
+      <a href="/lost">Lost Pets</a>
+    <a href="/found">Found Pets</a>
+  <a href="/login">Login</a>
+      <a href="/register">Register</a>
+
+
+
+</span>
+
+<div th:replace="base :: container"></div>
+
 <a href="/"> One Message</a><br/>
 Name:<span th:text="${dog.name}"></span><br />
 Date :<span th:text="${dog.date}"></span><br />
 Description :<p th:text="${dog.description}"></p>
 Status :<span th:text="${dog.status}" ></span><br />
-File :<span th:text="${dog.file}" ></span><br />
+File :<span th:text="${dog.pic}" ></span><br />
 <a th:href="@{/delete/{id}(id=${dog.id})}">Delete this message</a>
 
 

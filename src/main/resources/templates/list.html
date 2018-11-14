@@ -12,26 +12,9 @@
     </th:block>
 </head>
 <body>
-<span sec:authorize="isAuthenticated()">
-    <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
-  <a href="/add">Add Message</a>
-  <a href="/logout">Logout</a>
-  <span>Welcome</span>
-</span>
-
-<span sec:authorize="!isAuthenticated()">
-        <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
-  <a href="/login">Login</a>
-      <a href="/register">Register</a>
+<div th:replace="base:: nav"></div>
 
 </span>
-
-<div th:fragment="container"></div>
-
 
 <table>
     <tr>
@@ -39,24 +22,28 @@
         <th>Date</th>
         <th>Description</th>
         <th>Status</th>
-        <th>File</th>
+        <th>Pic</th>
     </tr>
+
     <tr th:each="dog : ${dogs}">
         <td th:text="${dog.name}"></td>
         <td th:date="${dog.date}"><</td>
         <td th:text="${dog.description}"></td>
+        <img th:src="${dog.pic}"/>
         <td th:text="${dog.status}"></td>
-        <td th:file="${dog.file}"></td>
-        <td>
-            <div sec:authorize="hasAuthority('ADMIN')">
-                <a th:href="@{/update/{id}(id=${dog.id})}">Update</a> -
-                <a th:href="@{/detail/{id}(id=${dog.id})}">Details</a> -
-                <a th:href="@{/delete/{id}(id=${dog.id})}">Delete</a> -
-            </div>
-            <div sec:authorize="hasAuthority('USER')">
-                <a th:href="@{/detail/{id}(id=${dog.id})}">Details</a> -
-            </div>
-        </td></tr>
+
+        <span sec:authorize="isAuthenticated()">
+        <a th:href="@{/update/{id}(id=${dog.id})}">Update</a>
+        </span>
+    </td>
+    </tr>
+
+
+        <!--<span sec:authorize="isAuthenticated()">-->
+            <!--<form method="POST" action="/process" th:object="${dog}"/>-->
+            <!--<a th:href="@{/update/{status}(status=${dog.status})}"Update />-->
+        <!--</span>-->
+
 
 </table>
 </body>

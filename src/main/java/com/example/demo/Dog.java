@@ -21,7 +21,9 @@ public class Dog {
 
     private String status;
 
-    private String file;
+    private String pic;
+
+
 
     public long getId() {
         return id;
@@ -63,11 +65,12 @@ public class Dog {
         this.status = status;
     }
 
-    public String getFile() {
-        return file;
+    public String getPic() {
+        return pic;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }
+
