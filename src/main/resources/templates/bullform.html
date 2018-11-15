@@ -12,38 +12,20 @@
     </th:block>
 </head>
 <body>
-<body>
-<span sec:authorize="isAuthenticated()">
-       <a href="#">Welcome <span th:text="${#authentication.name}"></span></a>
-    <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
-  <a href="/add">Add Message</a>
-  <a href="/logout">Logout</a>
+<div th:replace="base:: nav"></div>
 
-</span>
-
-<span sec:authorize="!isAuthenticated()">
-        <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
-  <a href="/login">Login</a>
-      <a href="/register">Register</a>
-
-</span>
+<form method="POST" action="/process" th:object="${bull}"
+      enctype="multipart/form-data">
 
 
-<div class="col-sm-3">
-    <div class="card text-center">
-        <div th:each="result:${results}">
-            <p th:text="${result.name}"></p><h5>is lost!
-            <p th:text="${result.date}"></p>
-            <p th:text="${result.description}"></p>
-            <img th:src="${result.pic}"/>
-            <p th:text="${result.status}"></p>
-        </div>
+    Title :<input type="text" th:field="*{title}" /><br>
+    Content :<textarea rows="3" th:field="*{content}" /><br>
+    Hashtag :<input type="text" th:field="*{hashtag}" /><br>
+    <input type="submit" value="Submit" />
+    <br />
 
-    </div><!--end div class col-->
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -55,6 +37,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-
+</form>
 </body>
 </html>

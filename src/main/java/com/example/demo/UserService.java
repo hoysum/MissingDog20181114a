@@ -43,6 +43,12 @@ public class UserService {
         user.setEnabled(true);
         userRepository.save(user);
     }
+
+    public void getAvatar(User user) {
+        user.setRoles(Arrays.asList (roleRepository.findByRole("USER")));
+        user.setEnabled(true);
+        userRepository.save(user);
+    }
     public void saveAdmin(User user) {
         user.setRoles(Arrays.asList(roleRepository.findByRole("ADMIN")));
         user.setEnabled(true);

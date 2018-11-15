@@ -17,31 +17,32 @@
     <!--< class="navbar navbar navbar-expand-lg navbar-dark bg-dark fixed-top">-->
 
         <!-- Links -->
-        <ul class="navbar-nav">
+        < class="navbar-nav">
            <span sec:authorize="isAuthenticated()">
        <a href="#">Welcome <span th:text="${#authentication.name}"></span></a>
-    <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
+        <a href="/all">Welcome</a>
+      <a href="/followyou">Followyou</a>
+    <a href="/youfollow">YouFollow</a>
   <a href="/add">Add Message</a>
   <a href="/logout">Logout</a>
 
 </span>
 
             <span sec:authorize="!isAuthenticated()">
-        <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
+        <a href="/all">Welcome</a>
+      <a href="/followyou">Followyou</a>
+    <a href="/youfollow">YouFollow</a>
   <a href="/login">Login</a>
       <a href="/register">Register</a>
-
-
-    <div class="jumbotron text-center">
-        <h1>Help Find our Lost Furry Friends &#9785;</h1>
-    </div>
-
-
+            </span>
 </div>
+
+    <div th: class="jumbotron text-center">
+        <h1>Bullhorn Messages </h1>
+    </div>
+<!--&#9785;-->
+
+
 
 <div th:fragment="footer">
     Copyright 2018

@@ -19,7 +19,7 @@ public class HomeController {
     private UserService userService;
 
     @Autowired
-    private DogRepository dogRepository;
+    private BullRepository bullRepository;
 
     @Autowired
     CloudinaryConfig cloudc;
@@ -43,52 +43,53 @@ public class HomeController {
         } else {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
+
         }
         return "list";
     }
 
     @RequestMapping("/")
-    public String listDogs(Model model) {
-        model.addAttribute("dogs", dogRepository.findAll());
+    public String listBulls(Model model) {
+        model.addAttribute("bulls", bullRepository.findAll());
         return "list";
     }
 
     @RequestMapping("/all")
-    public String allDogs(Model model) {
-        model.addAttribute("dogs", dogRepository.findAll());
+    public String allBulls(Model model) {
+        model.addAttribute("bulls", bullRepository.findAll());
         return "list";
     }
 
-    @RequestMapping("/lost")
-    public String lostDogs(Model model) {
-        String status = "lost";
-        ArrayList<Dog> results = (ArrayList<Dog>)
-                dogRepository.findAllByStatusContainingIgnoreCase(status);
+    @RequestMapping("/followyou")
+    public String hashBulls(Model model) {
+        String status = "found";
+        ArrayList<Bull> results = (ArrayList<Bull>)
+                bullRepository.findAllByStatusContainingIgnoreCase(status);
 
         model.addAttribute("results", results);
-        return "lostdogs";
+        return "followyou";
     }
 
-    @RequestMapping("/found")
-    public String foundDogs(Model model) {
+    @RequestMapping("/youfollow")
+    public String foundBulls(Model model) {
         String status = "found";
-        ArrayList<Dog> results = (ArrayList<Dog>)
-                dogRepository.findAllByStatusContainingIgnoreCase(status);
+        ArrayList<Bull> results = (ArrayList<Bull>)
+                bullRepository.findAllByStatusContainingIgnoreCase(status);
 
         model.addAttribute("results", results);
-        return "founddogs";
+        return "youfollow";
     }
 
 
 
     @GetMapping("/add")
-    public String dogForm(Model model) {
-        model.addAttribute("dog", new Dog());
-        return "dogform";
+    public String bullForm(Model model) {
+        model.addAttribute("bull", new Bull());
+        return "bullform";
     }
 
     @PostMapping("/process")
-    public String processDog(@ModelAttribute Dog dog,
+    public String processBull(@ModelAttribute Bull bull,
                              @RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return "redirect:/add";
@@ -96,8 +97,8 @@ public class HomeController {
         try {
             Map uploadResult = cloudc.upload(file.getBytes(),
                     ObjectUtils.asMap("resourcetype", "auto"));
-            dog.setPic(uploadResult.get("url").toString());
-            dogRepository.save(dog);
+            bull.setPic(uploadResult.get("url").toString());
+           bullRepository.save(bull);
         } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/add";
@@ -106,26 +107,20 @@ public class HomeController {
 
     }
 
-//    public String processForm(@Valid Dog dog,
-//                              BindingResult result){
-//
-//        dogRepository.save(dog);
-//        return "redirect:/";
-
     @RequestMapping("/detail/{id}")
-    public String showDog(@PathVariable("id") long id, Model model) {
-        model.addAttribute("dog", dogRepository.findById(id).get());
+    public String showBull(@PathVariable("id") long id, Model model) {
+        model.addAttribute("bull", bullRepository.findById(id).get());
         return "show";
     }
 
     @RequestMapping("/update/{id}")
-    public String updateDog(@PathVariable("id") long id, Model model) {
-        model.addAttribute("dog", dogRepository.findById(id).get());
-        return "dogform";
+    public String updateBull(@PathVariable("id") long id, Model model) {
+        model.addAttribute("bull", bullRepository.findById(id).get());
+        return "bullform";
     }
     @RequestMapping("/delete/{id}")
-    public String delDog(@PathVariable("id") long id){
-        dogRepository.deleteById(id);
+    public String delBull(@PathVariable("id") long id){
+        bullRepository.deleteById(id);
         return "redirect:/";
 
 

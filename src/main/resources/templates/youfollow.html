@@ -12,39 +12,13 @@
     </th:block>
 </head>
 <body>
-<body>
-<span sec:authorize="isAuthenticated()">
-       <a href="#">Welcome <span th:text="${#authentication.name}"></span></a>
-    <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
-  <a href="/add">Add Message</a>
-  <a href="/logout">Logout</a>
-
-</span>
-
-<span sec:authorize="!isAuthenticated()">
-        <a href="/all">All Pets</a>
-      <a href="/lost">Lost Pets</a>
-    <a href="/found">Found Pets</a>
-  <a href="/login">Login</a>
-      <a href="/register">Register</a>
-
-</span>
-
-
-</span>
 
 
 <div class="col-sm-3">
     <div class="card text-center">
         <div th:each="result:${results}">
-            <p th:text="${result.name}"></p><h5>is found!
-            <p th:text="${result.date}"></p>
-            <p th:text="${result.description}"></p>
-            <img th:src="${result.pic}"/>
-            <p th:text="${result.status}"></p>
-        </div>
+            <p th:text="${result.title}"></p><h5>is found!
+
 
     </div><!--end div class col-->
 

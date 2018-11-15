@@ -12,7 +12,7 @@
     </th:block>
 </head>
 <body>
-<body>
+<div th:replace="base :: nav"></div>
 <span sec:authorize="isAuthenticated()">
        <a href="#">Welcome <span th:text="${#authentication.name}"></span></a>
     <a href="/all">All Pets</a>

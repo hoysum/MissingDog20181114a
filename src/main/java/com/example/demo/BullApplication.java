@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FindfidoApplication {
+public class BullApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FindfidoApplication.class, args);
+		SpringApplication.run(BullApplication.class, args);
 	}
 }

@@ -18,22 +18,19 @@
 
 <table>
     <tr>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Pic</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Hashtag</th>
+
     </tr>
 
-    <tr th:each="dog : ${dogs}">
-        <td th:text="${dog.name}"></td>
-        <td th:date="${dog.date}"><</td>
-        <td th:text="${dog.description}"></td>
-        <img th:src="${dog.pic}"/>
-        <td th:text="${dog.status}"></td>
+    <tr th:each="bull : ${bulls}">
+        <td th:text="${bull.title}"></td>
+        <td th:text="${bull.content}"><</td>
+        <td th:text="${bull.hashtag}"></td>
 
         <span sec:authorize="isAuthenticated()">
-        <a th:href="@{/update/{id}(id=${dog.id})}">Update</a>
+        <a th:href="@{/update/{id}(id=${bull.id})}">Update</a>
         </span>
     </td>
     </tr>
